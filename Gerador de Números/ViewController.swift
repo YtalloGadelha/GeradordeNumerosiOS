@@ -10,20 +10,41 @@ import UIKit
 
 class ViewController: UIViewController {
 
-    @IBOutlet weak var legendaResultado: UILabel!
+    @IBOutlet weak var legendaGerada: UILabel!
+    @IBOutlet weak var numeroEscolhido: UITextField!
+    @IBOutlet weak var resultado: UILabel!
+    
+    override func viewDidLoad() {
+        
+        super.viewDidLoad()
+        numeroEscolhido.layer.cornerRadius = 10
+        numeroEscolhido.layer.masksToBounds = true
+        legendaGerada.layer.cornerRadius = 10
+        legendaGerada.layer.masksToBounds = true
+        resultado.layer.cornerRadius = 10
+        resultado.layer.masksToBounds = true
+        
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
+    }
     
     @IBAction func gerarNumero(_ sender: Any) {
         
-        var numero = arc4random_uniform(11)
+        let numero = arc4random_uniform(101)
+        legendaGerada.text = String(numero)
         
-        legendaResultado.text = String(numero)
+        if let numeroEscolhido = Int(numeroEscolhido.text!) {
+            if numeroEscolhido == Int(numero) {
+                resultado.text = "Acertou"
+            } else {
+                resultado.text = "Errou"
+            }
+        } else {
+            resultado.text = "Por favor, escolha um número válido"
+        }
+        
     }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view.
-    }
-
 
 }
-

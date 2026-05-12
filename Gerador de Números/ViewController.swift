@@ -32,16 +32,21 @@ class ViewController: UIViewController {
     
     @IBAction func gerarNumero(_ sender: Any) {
         
-        let numero = arc4random_uniform(101)
-        legendaGerada.text = String(numero)
+        let numero = arc4random_uniform(11)
         
-        if let numeroEscolhido = Int(numeroEscolhido.text!) {
+        if let numeroEscolhido = Int(numeroEscolhido.text!), numeroEscolhido >= 0, numeroEscolhido < 11{
             if numeroEscolhido == Int(numero) {
+                legendaGerada.text = "Número gerado: \(numero)"
+                legendaGerada.textColor = .green
                 resultado.text = "Acertou"
+                resultado.textColor = .green
             } else {
+                legendaGerada.text = "Número gerado: \(numero)"
                 resultado.text = "Errou"
             }
         } else {
+            numeroEscolhido.text = ""
+            legendaGerada.text = ""
             resultado.text = "Por favor, escolha um número válido"
         }
         
